@@ -1,0 +1,11 @@
+src/.env
+__pycache__/
+*.csv
+*.parquet
+
+# Dataset
+src/analysis/data/
+src/analysis/data/*.parquet
+
+src/data/raw/
+src/warehouse/data/
