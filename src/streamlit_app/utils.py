@@ -241,7 +241,7 @@ def extract_features(video_info):
     subscriber_count_log = np.log1p(video_info["subscriber_count"])
     video_count_log      = np.log1p(video_info["channel_video_count"])
     duration_log         = np.log1p(video_info["duration"])
-    view_count_log = np.log1p(video_info["channel_view_count"])
+    view_count_log = np.log1p(video_info["views"])
 
     return {
         "subscriber_count":   subscriber_count_log,

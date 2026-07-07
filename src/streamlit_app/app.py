@@ -1,7 +1,7 @@
 import streamlit as st
 from dotenv import load_dotenv
 
-from page.account import render_account
+from page.dashboard import render_dashboard
 from page.home import render_home
 from page.predict_page import render_predict
 from page.live_dashboard import render_trending
@@ -11,7 +11,6 @@ load_dotenv()
 
 st.set_page_config(
     page_title="VISION",
-    page_icon="👁️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -20,9 +19,9 @@ load_global_css()
 
 PAGES = {
     "home": render_home,
+    "dashboard": render_dashboard,
     "trending": render_trending,
     "predict": render_predict,
-    "account": render_account,
 }
 
 current_tab = st.query_params.get("tab", "home")

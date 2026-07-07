@@ -15,6 +15,7 @@ def load_global_css() -> None:
 def render_navbar(active_tab: str = "home") -> None:
     nav_items = [
         ("home", "", "Home"),
+        ("dashboard", "", "Dashboard"),
         ("trending", "", "Trending Analytics"),
         ("predict", "", "Predict"),
     ]
@@ -29,28 +30,6 @@ def render_navbar(active_tab: str = "home") -> None:
             VISION
         </a>
         <div class="nav-links">{links}</div>
-        <div class="nav-right">
-            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Chuyển chế độ sáng/tối">
-                <span id="themeIcon">🌙</span>
-            </button>
-        </div>
+        <div class="nav-right" style="width: 120px;"></div>
     </div>
-
-    <script>
-    (function() {{
-        var saved = localStorage.getItem('vision_theme');
-        if (saved === 'dark') {{
-            document.body.classList.add('dark-mode');
-            var icon = document.getElementById('themeIcon');
-            if (icon) icon.textContent = '☀️';
-        }}
-    }})();
-
-    function toggleTheme() {{
-        var isDark = document.body.classList.toggle('dark-mode');
-        var icon = document.getElementById('themeIcon');
-        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-        localStorage.setItem('vision_theme', isDark ? 'dark' : 'light');
-    }}
-    </script>
     """, unsafe_allow_html=True)

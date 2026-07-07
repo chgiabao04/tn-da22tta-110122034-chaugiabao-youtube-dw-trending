@@ -4,7 +4,7 @@ import xgboost as xgb
 from sklearn.preprocessing import LabelEncoder
 
 # Load model safely
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "xgb_trending_model.json")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "models", "xgb_trending_model_v2.json")
 
 try:
     model = xgb.XGBClassifier()
@@ -25,6 +25,7 @@ FEATURES = [
     "comment_rate",
     "topic",
     "country_region",
+    "publish_hour",
 ]
 
 # LabelEncoders cho categorical features
@@ -83,6 +84,7 @@ def predict_trending(features_dict):
         features_dict['comment_rate'],
         topic_encoded,
         country_encoded,
+        features_dict['publish_hour'],
     ]])
 
     proba = model.predict_proba(X_input)[0, 1]

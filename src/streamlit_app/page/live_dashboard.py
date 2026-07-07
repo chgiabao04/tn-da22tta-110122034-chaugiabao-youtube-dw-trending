@@ -385,43 +385,48 @@ a { text-decoration: none !important; }
 }
 
 /* Override Streamlit column gap inside the header */
-.ld-header-cols [data-testid="stHorizontalBlock"] {
+[class*="st-key-ld-header-container"] [data-testid="stHorizontalBlock"] {
     gap: 24px !important;
-    align-items: end !important;
+    align-items: flex-end !important;
+    flex-wrap: nowrap !important;
 }
-.ld-header-cols [data-testid="column"] {
+[class*="st-key-ld-header-container"] [data-testid="column"] {
     padding: 0 !important;
 }
 /* Title column: grow to fill remaining space */
-.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
+[class*="st-key-ld-header-container"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {
     flex: 1 1 auto !important;
     min-width: 0 !important;
-    align-self: center !important;
+    align-self: flex-end !important; /* Đổi từ center thành flex-end */
+    padding-bottom: 5px !important;   /* Thêm dòng này để căn chỉnh thẳng hàng */
 }
 /* Country column: fixed ~220 px */
-.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
+[class*="st-key-ld-header-container"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {
     flex: 0 0 220px !important;
     max-width: 220px !important;
     min-width: 220px !important;
 }
 /* Display Count column: fixed ~170 px */
-.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
+[class*="st-key-ld-header-container"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {
     flex: 0 0 170px !important;
     max-width: 170px !important;
     min-width: 170px !important;
 }
 /* Last Updated column: auto-fit the time-box + button */
-.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
+[class*="st-key-ld-header-container"] [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {
     flex: 0 0 auto !important;
     min-width: 190px !important;
     max-width: 240px !important;
 }
 /* Header background + padding */
-.ld-header-cols { padding: 16px 24px; background: var(--surface); border-bottom: 1px solid var(--border); }
+[class*="st-key-ld-header-container"] { padding: 28px 24px 16px 24px; margin-top: 4px; background: var(--surface); border-bottom: 1px solid var(--border); }
 /* Restore small gap between the label markdown and selectbox widget */
-.ld-header-cols [data-testid="stVerticalBlock"] { gap: 2px !important; justify-content: flex-end !important; }
+[class*="st-key-ld-header-container"] [data-testid="stVerticalBlock"] { gap: 2px !important; justify-content: flex-end !important; }
+/* Align control widgets to the bottom of their column */
+[class*="st-key-ld-header-container"] [data-testid="stSelectbox"] { margin-top: auto !important; margin-bottom: 0 !important; padding: 0 !important; }
+[class*="st-key-ld-header-container"] .ld-refresh-row { margin-top: auto !important; height: 40px !important; }
 /* Selectbox outer box: dark pill matching the mockup */
-.ld-header-cols [data-testid="stSelectbox"] > div > div {
+[class*="st-key-ld-header-container"] [data-testid="stSelectbox"] > div > div {
     background: #161616 !important;
     border: 1px solid rgba(255,255,255,0.08) !important;
     border-radius: 10px !important;
@@ -432,29 +437,11 @@ a { text-decoration: none !important; }
     transition: border-color 0.2s !important;
     cursor: pointer !important;
 }
-.ld-header-cols [data-testid="stSelectbox"] > div > div:hover {
+[class*="st-key-ld-header-container"] [data-testid="stSelectbox"] > div > div:hover {
     border-color: rgba(255,255,255,0.18) !important;
 }
-/* Inner container: stretch to fill the outer box */
-.ld-header-cols [data-testid="stSelectbox"] > div > div > div {
-    display: flex !important; align-items: center !important;
-    width: 100% !important; height: 100% !important;
-    padding: 0 !important;
-}
-/* Selected value text (baseweb + generic fallbacks) */
-.ld-header-cols [data-baseweb="select"] [data-baseweb="value"],
-.ld-header-cols [data-baseweb="select"] [data-baseweb="tag"],
-.ld-header-cols [data-testid="stSelectbox"] [data-baseweb="select"] span,
-.ld-header-cols [data-testid="stSelectbox"] > div > div > div > div:first-child,
-.ld-header-cols [data-testid="stSelectbox"] > div > div > div > div:first-child span {
-    font-size: 0.88rem !important;
-    font-weight: 500 !important;
-    color: #ffffff !important;
-    font-family: 'Inter', sans-serif !important;
-    line-height: 1 !important;
-}
 /* Chevron / dropdown arrow: muted white */
-.ld-header-cols [data-testid="stSelectbox"] svg {
+[class*="st-key-ld-header-container"] [data-testid="stSelectbox"] svg {
     color: rgba(255,255,255,0.40) !important;
     fill: rgba(255,255,255,0.40) !important;
     width: 15px !important; height: 15px !important;
@@ -516,18 +503,18 @@ a { text-decoration: none !important; }
 }
 .vtable tbody tr:hover { background: rgba(255,255,255,.025); }
 .vtable tbody tr:last-child { border-bottom: none; }
-.vtable td { padding: 9px 10px; vertical-align: middle; }
+.vtable td { padding: 12px 10px; vertical-align: middle; }
 .v-rank {
-    width: 26px; height: 26px; border-radius: 7px;
+    width: 32px; height: 32px; border-radius: 8px;
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 0.72rem; font-weight: 800;
+    font-size: 0.85rem; font-weight: 800;
     background: var(--surface2); color: var(--text-dim);
     border: 1px solid var(--border); flex-shrink: 0;
 }
 .v-rank.top3 { background: var(--red); color: #fff; border-color: transparent; }
 .v-thumb-wrap {
-    position: relative; width: 88px; height: 52px;
-    border-radius: 7px; overflow: hidden; flex-shrink: 0; background: #1a1a1a;
+    position: relative; width: 120px; height: 68px;
+    border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #1a1a1a;
 }
 .v-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .v-dur {
@@ -536,33 +523,33 @@ a { text-decoration: none !important; }
     font-size: 0.58rem; font-weight: 700;
     padding: 1px 4px; border-radius: 3px; letter-spacing: .2px;
 }
-.v-info { display: flex; align-items: center; gap: 9px; }
+.v-info { display: flex; align-items: center; gap: 12px; }
 .v-title {
-    font-size: 0.79rem; font-weight: 600; color: var(--text);
-    line-height: 1.35; max-width: 300px;
+    font-size: 0.88rem; font-weight: 600; color: var(--text);
+    line-height: 1.35; max-width: 480px;
     display: -webkit-box; -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden;
     font-family: 'Inter', sans-serif;
 }
 .v-channel {
-    font-size: 0.66rem; color: var(--red);
+    font-size: 0.72rem; color: var(--red);
     margin-top: 2px; font-weight: 500;
     display: flex; align-items: center; gap: 3px;
     font-family: 'Inter', sans-serif;
 }
-.v-meta { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; font-family: 'Inter', sans-serif; }
-.v-stat { font-size: 0.76rem; font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
-.v-stat-sub { font-size: 0.62rem; color: var(--text-muted); text-align: right; white-space: nowrap; margin-top: 2px; }
+.v-meta { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; font-family: 'Inter', sans-serif; }
+.v-stat { font-size: 0.84rem; font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+.v-stat-sub { font-size: 0.68rem; color: var(--text-muted); text-align: right; white-space: nowrap; margin-top: 2px; }
 .v-link {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 7px;
+    width: 32px; height: 32px; border-radius: 8px;
     background: var(--red-dim); border: 1px solid var(--red-border);
-    color: var(--red) !important; font-size: 0.80rem;
+    color: var(--red) !important; font-size: 0.90rem;
     transition: background .15s;
 }
 .v-link:hover { background: var(--red); color: #fff !important; }
 .vtable-scroll {
-    max-height: 520px; overflow-y: auto;
+    max-height: 650px; overflow-y: auto;
     scrollbar-width: thin; scrollbar-color: rgba(232,0,29,.3) transparent;
 }
 .vtable-scroll::-webkit-scrollbar { width: 4px; }
@@ -739,6 +726,26 @@ a { text-decoration: none !important; }
     animation: dot-blink 1.4s ease-in-out infinite;
 }
 .ld-footer-online { color: var(--green); font-weight: 600; }
+
+/* ── TRENDING ACROSS TIME CARD (Plotly Integration) ── */
+[class*="st-key-trending-across-time-card"] {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--r) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 12px !important;
+}
+[class*="st-key-trending-across-time-card"] [data-testid="element-container"] {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+[class*="st-key-trending-across-time-card"] .stPlotlyChart {
+    padding: 0 4px 8px 4px !important;
+    margin: 0 !important;
+}
 </style>
 """
 
@@ -803,50 +810,7 @@ def _donut_svg(cat_data, total, size=108) -> str:
     )
 
 
-def _time_chart_svg(seed=7, w=260, h=90) -> str:
-    """Red line chart mimicking the 'Trending theo thời gian' panel."""
-    pts = [
-        5 + 75 * (0.3 + 0.6 * abs(math.sin(i * 0.55 + seed))
-                  + 0.15 * math.sin(i * 1.8 + seed))
-        for i in range(20)
-    ]
-    mn, mx = min(pts), max(pts); rng = mx - mn or 1
-    xs = [i * w / 19 for i in range(20)]
-    ys = [h - 8 - ((v - mn) / rng) * (h - 18) for v in pts]
-    path = "M " + " L ".join(f"{x:.1f},{y:.1f}" for x, y in zip(xs, ys))
-    area = path + f" L{w},{h-8} L0,{h-8} Z"
-    # y-axis labels
-    y_vals = ["20M", "15M", "10M", "5M", "0"]
-    y_labels = ""
-    for j, lbl in enumerate(y_vals):
-        y_pos = 8 + j * (h - 18) / 4
-        y_labels += f'<text x="0" y="{y_pos:.0f}" font-size="7" fill="rgba(255,255,255,.28)" dominant-baseline="middle">{lbl}</text>'
-    # x-axis labels
-    x_times = ["04:00", "08:00", "12:00", "16:00", "20:00", "24:00"]
-    x_labels = ""
-    for j, lbl in enumerate(x_times):
-        x_pos = j * w / 5
-        x_labels += f'<text x="{x_pos:.0f}" y="{h}" font-size="7" fill="rgba(255,255,255,.28)" text-anchor="middle">{lbl}</text>'
-    # grid lines
-    grid = ""
-    for j in range(5):
-        y_pos = 8 + j * (h - 18) / 4
-        grid += f'<line x1="28" y1="{y_pos:.0f}" x2="{w}" y2="{y_pos:.0f}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>'
 
-    return (
-        f'<svg class="time-chart-svg" viewBox="0 0 {w} {h+10}" '
-        f'xmlns="http://www.w3.org/2000/svg">'
-        f'{grid}'
-        f'<defs><linearGradient id="tcg" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0%" stop-color="#E8001D" stop-opacity=".22"/>'
-        f'<stop offset="100%" stop-color="#E8001D" stop-opacity="0"/>'
-        f'</linearGradient></defs>'
-        f'<path d="{area}" fill="url(#tcg)"/>'
-        f'<path d="{path}" fill="none" stroke="#E8001D" stroke-width="1.8" '
-        f'stroke-linecap="round" stroke-linejoin="round"/>'
-        f'{y_labels}{x_labels}'
-        f'</svg>'
-    )
 
 
 def _world_map_svg(region: str) -> str:
@@ -872,7 +836,6 @@ def _kpi_card(icon, icon_bg, label, value, desc, color, seed) -> str:
         f'<div class="kpi-card">'
         f'<div class="kpi-top">'
         f'<div class="kpi-label">{label}</div>'
-        f'<div class="kpi-icon" style="background:{icon_bg}">{icon}</div>'
         f'</div>'
         f'<div class="kpi-val">{value}</div>'
         f'<div class="kpi-desc">{desc}</div>'
@@ -899,21 +862,21 @@ def _video_rows(top_videos) -> str:
         top3    = "top3" if rank <= 3 else ""
         rows += (
             f'<tr>'
-            f'<td style="width:32px"><span class="v-rank {top3}">{rank}</span></td>'
+            f'<td style="width:40px"><span class="v-rank {top3}">{rank}</span></td>'
             f'<td>'
             f'<div class="v-info">'
             f'<div class="v-thumb-wrap"><img src="{thumb}" alt="" loading="lazy"/></div>'
             f'<div>'
             f'<div class="v-title">{title}</div>'
-            f'<div class="v-channel">{channel} ✓</div>'
+            f'<div class="v-channel">{channel}</div>'
             f'<div class="v-meta">{views} views · {ago}</div>'
             f'</div></div>'
             f'</td>'
-            f'<td style="width:64px">'
-            f'<div class="v-stat">👍 {likes}</div>'
+            f'<td style="width:80px">'
+            f'<div class="v-stat">{likes}</div>'
             f'<div class="v-stat-sub">💬 {comms}</div>'
             f'</td>'
-            f'<td style="width:30px">'
+            f'<td style="width:40px">'
             f'<a href="{yt_url}" target="_blank" rel="noopener" class="v-link">↗</a>'
             f'</td>'
             f'</tr>'
@@ -921,10 +884,10 @@ def _video_rows(top_videos) -> str:
     return rows
 
 
-def _channel_rows(top_channels, total) -> str:
+def _channel_rows(top_channels, total_views) -> str:
     rows = ""
-    for idx, (channel, count) in enumerate(top_channels):
-        pct     = (count / total * 100) if total else 0
+    for idx, (channel, views) in enumerate(top_channels):
+        pct     = (views / total_views * 100) if total_views else 0
         top_cls = "top3" if idx < 3 else ""
         initials = "".join(w[0].upper() for w in channel.split()[:2]) or "CH"
         rows += (
@@ -933,7 +896,7 @@ def _channel_rows(top_channels, total) -> str:
             f'<div class="ch-avatar">{initials[:2]}</div>'
             f'<div class="ch-info">'
             f'<div class="ch-name">{_e(channel)}</div>'
-            f'<div class="ch-sub">{count} video trending</div>'
+            f'<div class="ch-sub">{_fmt(views)} lượt xem</div>'
             f'</div>'
             f'<div class="ch-pct">{pct:.0f}%</div>'
             f'</div>'
@@ -958,7 +921,7 @@ def _category_card(sorted_cats, total) -> str:
     return (
         f'<div class="vcard">'
         f'<div class="vcard-head">'
-        f'<div class="vcard-title">Trending theo danh mục</div>'
+        f'<div class="vcard-title">Trending across categories</div>'
         f'<span class="live-badge">LIVE</span>'
         f'</div>'
         f'<div class="donut-body">'
@@ -972,33 +935,88 @@ def _category_card(sorted_cats, total) -> str:
     )
 
 
-def _time_chart_card() -> str:
-    chart = _time_chart_svg(seed=7)
-    return (
-        f'<div class="vcard">'
-        f'<div class="vcard-head">'
-        f'<div class="vcard-title">Trending theo thời gian</div>'
-        f'<span class="live-badge">LIVE</span>'
-        f'</div>'
-        f'<div class="time-chart-body">{chart}</div>'
-        f'</div>'
-    )
+def _render_time_chart_card(seed=7) -> None:
+    import plotly.graph_objects as go
+    with st.container(key="trending-across-time-card"):
+        st.markdown(
+            f'<div class="vcard-head" style="border-bottom: 1px solid var(--border); padding: 10px 14px 9px;">'
+            f'<div class="vcard-title">Trending across time</div>'
+            f'<span class="live-badge">LIVE</span>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+        
+        pts = [
+            (0.3 + 0.6 * abs(math.sin(i * 0.55 + seed))
+             + 0.15 * math.sin(i * 1.8 + seed)) * 20_000_000
+            for i in range(24)
+        ]
+        times = [f"{i:02d}:00" for i in range(24)]
+        views_fmt = [_fmt(int(v)) for v in pts]
+
+        fig = go.Figure(
+            go.Scatter(
+                x=times,
+                y=pts,
+                mode="lines+markers",
+                line=dict(color="#E8001D", width=2),
+                marker=dict(
+                    color="#E8001D",
+                    size=4,
+                ),
+                fill="tozeroy",
+                fillcolor="rgba(232,0,29,0.08)",
+                text=views_fmt,
+                hovertemplate="<b>Time:</b> %{x}<br><b>Views:</b> %{text}<extra></extra>",
+            )
+        )
+        
+        fig.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            margin=dict(l=14, r=14, t=10, b=10),
+            height=180,
+            showlegend=False,
+            xaxis=dict(
+                showgrid=False,
+                color="rgba(255,255,255,0.28)",
+                dtick=4,
+                tickfont=dict(size=9, family="Inter, sans-serif"),
+                tickangle=0,
+            ),
+            yaxis=dict(
+                showgrid=True,
+                gridcolor="rgba(255,255,255,0.04)",
+                color="rgba(255,255,255,0.28)",
+                tickvals=[0, 5_000_000, 10_000_000, 15_000_000, 20_000_000],
+                ticktext=["0", "5M", "10M", "15M", "20M"],
+                tickfont=dict(size=9, family="Inter, sans-serif"),
+                zeroline=False,
+            ),
+            hovermode="x unified",
+            hoverlabel=dict(
+                bgcolor="#161616",
+                bordercolor="rgba(255,255,255,0.08)",
+                font=dict(color="#FFFFFF", family="Inter, sans-serif", size=10)
+            )
+        )
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
 
-def _channels_card(top_channels, total, region: str = "VN") -> str:
+def _channels_card(top_channels, total_views, region: str = "VN") -> str:
     country_name = COUNTRY_NAMES.get(region, region)
     return (
         f'<div class="vcard">'
         f'<div class="vcard-head">'
-        f'<div class="vcard-title">Top Channels – {_e(country_name)}</div>'
+        f'<div class="vcard-title">Top Channels By Views – {_e(country_name)}</div>'
         f'<span class="live-badge">LIVE</span>'
         f'</div>'
         f'<div class="ch-list">'
-        + _channel_rows(top_channels, total)
+        + _channel_rows(top_channels, total_views)
         + f'</div>'
-        f'<div class="short-see-all">Xem tất cả kênh →</div>'
         f'</div>'
     )
+
 
 def _countries_card(region: str, top_videos: list) -> str:
     map_svg = _world_map_svg(region)
@@ -1007,13 +1025,13 @@ def _countries_card(region: str, top_videos: list) -> str:
     return (
         f'<div class="vcard">'
         f'<div class="vcard-head">'
-        f'<div class="vcard-title">Trending Region</div>'
+        f'<div class="vcard-title">Trending Regions</div>'
         f'<span class="live-badge">LIVE</span>'
         f'</div>'
         f'<div class="country-map">{map_svg}'
         f'<div class="map-legend">'
         f'<span class="map-legend-dot"></span>'
-        f'<span>\u0110ang xem: {_e(country_name)}</span>'
+        f'<span>Current Watch: {_e(country_name)}</span>'
         f'</div>'
         f'</div>'
         f'</div>'
@@ -1104,8 +1122,7 @@ def _video_card(top_videos, total) -> str:
         f'</table>'
         f'</div>'
         f'<div class="v-see-all">'
-        f'<span>Xem tất cả Top {total}</span>'
-        f'<span>→</span>'
+        f'<span> View all {total}</span>'
         f'</div>'
         f'</div>'
     )
@@ -1149,51 +1166,42 @@ def render_trending() -> None:
     #  single horizontal CSS-grid row.
     # ═══════════════════════════════════
 
-    # Wrapper CSS that turns the Streamlit columns into a grid-aligned header
+    # ── HEADER: Title trái + 3 controls phải cùng hàng ──
     st.markdown(
         '<style>'
-        # Outer wrapper: full-width surface band
-        '.ld-header-cols {'
-        '  background: var(--surface);'
-        '  border-bottom: 1px solid var(--border);'
-        '  padding: 16px 24px;'
+        # Header container styling: increase top padding to 45px
+        '[class*="st-key-ld-header-container"] {'
+        '  background: var(--surface) !important;'
+        '  border-bottom: 1px solid var(--border) !important;'
+        '  padding: 45px 24px 16px 24px !important;'
         '}'
-        # Horizontal block: gap + vertical centering
-        '.ld-header-cols [data-testid="stHorizontalBlock"] {'
-        '  gap: 24px !important;'
-        '  align-items: stretch !important;'
+        # Controls Bar layout styling
+        '[class*="st-key-ld-controls-bar"] [data-testid="stHorizontalBlock"] {'
+        '  gap: 16px !important;'
+        '  align-items: flex-end !important;'
+        '  flex-wrap: nowrap !important;'
         '}'
-        '.ld-header-cols [data-testid="column"] { padding: 0 !important; }' 
-        # Every wrapper level must fill its parent height
-        '.ld-header-cols [data-testid="column"] > div,'
-        '.ld-header-cols [data-testid="stVerticalBlockBorderWrapper"],'
-        '.ld-header-cols [data-testid="stVerticalBlock"] {'
-        '  height: 100% !important;'
-        '  display: flex !important;'
-        '  flex-direction: column !important;'
-        '  gap: 2px !important;'
+        '[class*="st-key-ld-controls-bar"] [data-testid="column"] {'
+        '  padding: 0 !important;'
         '}'
-        # Push the ACTUAL control widgets to the bottom via margin-top: auto
-        '.ld-header-cols [data-testid="stSelectbox"] { margin-top: auto !important; }'
-        '.ld-header-cols .ld-refresh-row { margin-top: auto !important; }'
-        # Title column grows
-        '.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(1) {'
-        '  flex: 1 1 auto !important; min-width: 0 !important; align-self: center !important;'
+        # Reset margins for elements in controls bar to prevent vertical misalignment
+        '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] {'
+        '  margin: 0 !important;'
+        '  padding: 0 !important;'
         '}'
-        # Country column: ~220 px
-        '.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(2) {'
-        '  flex: 0 0 220px !important; max-width: 220px !important; min-width: 220px !important;'
+        '[class*="st-key-ld-controls-bar"] [data-testid="element-container"] {'
+        '  margin: 0 !important;'
+        '  padding: 0 !important;'
         '}'
-        # Display Count column: ~170 px
-        '.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(3) {'
-        '  flex: 0 0 170px !important; max-width: 170px !important; min-width: 170px !important;'
+        '[class*="st-key-ld-controls-bar"] .stMarkdown {'
+        '  margin: 0 !important;'
+        '  padding: 0 !important;'
         '}'
-        # Last Updated column: auto width
-        '.ld-header-cols [data-testid="stHorizontalBlock"] > [data-testid="column"]:nth-child(4) {'
-        '  flex: 0 0 auto !important; min-width: 190px !important;'
+        '[class*="st-key-ld-controls-bar"] .stMarkdown p {'
+        '  margin: 0 !important;'
         '}'
-        # Selectbox outer box: dark 48 px pill
-        '.ld-header-cols [data-testid="stSelectbox"] > div > div {'
+        # Custom Selectbox styling for Controls Bar (Deep dark pill)
+        '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] > div > div {'
         '  background: #161616 !important;'
         '  border: 1px solid rgba(255,255,255,0.08) !important;'
         '  border-radius: 10px !important;'
@@ -1201,102 +1209,37 @@ def render_trending() -> None:
         '  padding: 0 14px !important;'
         '  display: flex !important; align-items: center !important;'
         '  font-size: 0.85rem !important; font-weight: 500 !important;'
+        '  color: #ffffff !important;'
         '  transition: border-color 0.2s !important; cursor: pointer !important;'
         '}'
-        '.ld-header-cols [data-testid="stSelectbox"] > div > div:hover {'
+        '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] > div > div:hover {'
         '  border-color: rgba(255,255,255,0.18) !important;'
         '}'
-        # Inner flex container
-        '.ld-header-cols [data-testid="stSelectbox"] > div > div > div {'
-        '  display: flex !important; align-items: center !important;'
-        '  width: 100% !important; height: 100% !important; padding: 0 !important;'
-        '}'
-        # Selected text (baseweb + generic)
-        '.ld-header-cols [data-baseweb="select"] [data-baseweb="value"],'
-        '.ld-header-cols [data-testid="stSelectbox"] > div > div > div > div:first-child span {'
-        '  font-size: 0.85rem !important; font-weight: 500 !important;'
-        '  color: #ffffff !important; font-family: Inter,sans-serif !important;'
-        '}'
-        # Chevron arrow
-        '.ld-header-cols [data-testid="stSelectbox"] svg {'
+        '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] svg {'
         '  color: rgba(255,255,255,0.40) !important;'
         '  fill: rgba(255,255,255,0.40) !important;'
         '  width: 15px !important; height: 15px !important;'
         '}'
-        # Remove extra margin Streamlit puts on label markdown
-        '.ld-header-cols .stMarkdown { margin: 0 !important; }'
-        # Remove extra element-container padding/margin
-        '.ld-header-cols [data-testid="element-container"] { margin: 0 !important; padding: 0 !important; }'
-        # Ensure selectbox hidden label takes no space
-        '.ld-header-cols [data-testid="stSelectbox"] label { display: none !important; margin: 0 !important; padding: 0 !important; }'
-        # Ensure the selectbox widget wrapper has no extra margin
-        '.ld-header-cols [data-testid="stSelectbox"] { margin: 0 !important; padding: 0 !important; }'
-        # Force the filter label div to have zero bottom margin
-        '.ld-header-cols .ld-filter-label { margin: 0 0 4px 0 !important; padding: 0 !important; }'
-        # Force refresh row height to match selectbox
-        '.ld-header-cols .ld-refresh-row { height: 40px !important; }'
-        # Strip extra bottom margin from stMarkdown wrappers
-        '.ld-header-cols .stMarkdown p { margin: 0 !important; }'
-        '</style>'
-        '<div class="ld-header-cols">',
+        '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] label {'
+        '  display: none !important; margin: 0 !important; padding: 0 !important;'
+        '}'
+        '[class*="st-key-ld-controls-bar"] .ld-refresh-row {'
+        '  margin: 0 !important;'
+        '  height: 40px !important;'
+        '}'
+        '</style>',
         unsafe_allow_html=True,
     )
 
-    # Four columns matching grid-template-columns: 1.4fr 1fr 1fr auto
-    hc_title, hc_country, hc_top, hc_refresh = st.columns([1.4, 1.0, 1.0, 0.85], gap="small")
-
-    with hc_title:
+    with st.container(key="ld-header-container"):
+        # Header: chỉ hiện title
         st.markdown(
             '<div class="ld-header-left">'
-            '<div class="ld-pulse-icon">((·))</div>'
-            '<div>'
             '<div class="ld-h-title"><em>Live</em> YouTube Dashboard</div>'
-            '<div class="ld-h-sub">Theo dõi xu hướng YouTube Trending theo thời gian thực</div>'
-            '</div>'
+            '<div class="ld-h-sub">Monitor YouTube Trending across regions</div>'
             '</div>',
             unsafe_allow_html=True,
         )
-
-    with hc_country:
-        st.markdown('<div class="ld-filter-label">Country</div>', unsafe_allow_html=True)
-        try:
-            r_idx = list(REGIONS.values()).index(st.session_state["tt_region"])
-        except ValueError:
-            r_idx = 0
-        region_label = st.selectbox(
-            "Region", list(REGIONS.keys()), index=r_idx,
-            label_visibility="collapsed", key="tt_region_sel",
-        )
-        new_region = REGIONS[region_label]
-        if new_region != st.session_state["tt_region"]:
-            st.session_state["tt_region"] = new_region
-            st.rerun()
-
-    with hc_top:
-        st.markdown('<div class="ld-filter-label">Số lượng hiển thị</div>', unsafe_allow_html=True)
-        try:
-            t_idx = TOP_OPTS.index(st.session_state["tt_top"])
-        except ValueError:
-            t_idx = 0
-        top_label = st.selectbox(
-            "Top", TOP_OPTS, index=t_idx,
-            label_visibility="collapsed", key="tt_top_sel",
-        )
-        if top_label != st.session_state["tt_top"]:
-            st.session_state["tt_top"] = top_label
-            st.rerun()
-
-    with hc_refresh:
-        st.markdown('<div class="ld-filter-label">Cập nhật</div>', unsafe_allow_html=True)
-        st.markdown(
-            f'<div class="ld-refresh-row">'
-            f'<div class="ld-time-box">Cập nhật: {now_str}</div>'
-            f'<a class="ld-refresh-btn" href="?tab=trending&refresh=1" target="_self">↻</a>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-
-    st.markdown('</div>', unsafe_allow_html=True)  # close ld-header-cols
 
     # ── FETCH ──
     with st.spinner(""):
@@ -1318,17 +1261,55 @@ def render_trending() -> None:
     growth_est     = min(99.0, max(1.0, engagement * 1000))
 
     cat_counts     = {}
-    channel_counts = {}
+    channel_views  = {}
     for v in top_videos:
         sn       = v.get("snippet", {})
         cat_name = CAT_ID_TO_NAME.get(str(sn.get("categoryId","24")), "Khác")
         cat_counts[cat_name]  = cat_counts.get(cat_name, 0) + 1
         ch                    = sn.get("channelTitle","")
-        channel_counts[ch]    = channel_counts.get(ch, 0) + 1
+        views_val             = int(v.get("statistics", {}).get("viewCount", 0) or 0)
+        channel_views[ch]     = channel_views.get(ch, 0) + views_val
 
     sorted_cats  = sorted(cat_counts.items(), key=lambda x: x[1], reverse=True)
-    top_channels = sorted(channel_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+    top_channels = sorted(channel_views.items(), key=lambda x: x[1], reverse=True)[:5]
 
+    # ═══════════════════════════════════
+    #  CONTROLS BAR – above KPI cards
+    #  This row: [spacer] [Country] [Top]
+    # ═══════════════════════════════════
+    with st.container(key="ld-controls-bar"):
+        _spacer, ctrl_country, ctrl_top = st.columns(
+            [3.0, 1.0, 1.0],
+            gap="medium",
+            vertical_alignment="bottom",
+        )
+
+        with ctrl_country:
+            try:
+                r_idx = list(REGIONS.values()).index(st.session_state["tt_region"])
+            except ValueError:
+                r_idx = 0
+            region_label = st.selectbox(
+                "Country", list(REGIONS.keys()), index=r_idx,
+                key="tt_region_sel",
+            )
+            new_region = REGIONS[region_label]
+            if new_region != st.session_state["tt_region"]:
+                st.session_state["tt_region"] = new_region
+                st.rerun()
+
+        with ctrl_top:
+            try:
+                t_idx = TOP_OPTS.index(st.session_state["tt_top"])
+            except ValueError:
+                t_idx = 0
+            top_label = st.selectbox(
+                "Số video", TOP_OPTS, index=t_idx,
+                key="tt_top_sel",
+            )
+            if top_label != st.session_state["tt_top"]:
+                st.session_state["tt_top"] = top_label
+                st.rerun()
 
     # ═══════════════════════════════════
     #  SECTION 3 – KPI CARDS  (5 columns)
@@ -1337,17 +1318,18 @@ def render_trending() -> None:
     k1, k2, k3, k4, k5 = st.columns(5, gap="small")
 
     kpi_data = [
-        (k1, "▶️", "rgba(232,0,29,.15)",   "Video Trending",   str(total),            f"đang thịnh hành",         "#E8001D", 1),
-        (k2, "👁️", "rgba(59,130,246,.15)", "Tổng lượt xem",   _fmt(total_views),      f"trong top {total} video", "#3B82F6", 2),
-        (k3, "👍", "rgba(34,197,94,.15)",  "Tổng lượt thích",  _fmt(total_likes),      f"trong top {total} video", "#22C55E", 3),
-        (k4, "💬", "rgba(245,158,11,.15)", "Tổng bình luận",   _fmt(total_comments),   f"trong top {total} video", "#F59E0B", 4),
-        (k5, "🔥", "rgba(168,85,247,.15)", "Xu hướng tăng",    f"+{growth_est:.0f}%",  "so với 1 giờ trước",       "#A855F7", 5),
+        (k1, "", "rgba(232,0,29,.15)",   "Trending Videos",   str(total),            f"currently trending",         "#E8001D", 1),
+        (k2, "", "rgba(59,130,246,.15)", "Total Views",   _fmt(total_views),      f"across top {total} videos", "#3B82F6", 2),
+        (k3, "", "rgba(34,197,94,.15)",  "Total Likes",  _fmt(total_likes),      f"across top {total} videos", "#22C55E", 3),
+        (k4, "", "rgba(245,158,11,.15)", "Total Comments",   _fmt(total_comments),   f"across top {total} videos", "#F59E0B", 4),
+        (k5, "", "rgba(168,85,247,.15)", "Growth Trend",    f"+{growth_est:.0f}%",  "vs. 1 hour ago",       "#A855F7", 5),
     ]
     for col, icon, icon_bg, label, value, desc, color, seed in kpi_data:
         with col:
             st.markdown(_kpi_card(icon, icon_bg, label, value, desc, color, seed), unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
+
 
     # ═══════════════════════════════════
     #  SECTION 4 – MAIN GRID
@@ -1364,15 +1346,15 @@ def render_trending() -> None:
         st.markdown(
             f'<div class="right-stack">'
             + _category_card(sorted_cats, total)
-            + _channels_card(top_channels, total, st.session_state["tt_region"])
+            + _channels_card(top_channels, total_views, st.session_state["tt_region"])
             + f'</div>',
             unsafe_allow_html=True,
         )
 
     with col_right:
+        _render_time_chart_card()
         st.markdown(
             f'<div class="right-stack">'
-            + _time_chart_card()
             + _countries_card(st.session_state["tt_region"], top_videos)
             + f'</div>',
             unsafe_allow_html=True,
@@ -1387,12 +1369,12 @@ def render_trending() -> None:
         f'<div class="ld-footer">'
         f'<div class="ld-footer-item">'
         f'<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect width="13" height="13" rx="3" fill="#E8001D"/><polygon points="5,3 10,6.5 5,10" fill="white"/></svg>'
-        f'Nguồn dữ liệu: YouTube Data API v3'
+        f'Source: YouTube Data API v3'
         f'</div>'
-        f'<div class="ld-footer-item">⏰ Cập nhật mỗi 1 phút</div>'
-        f'<div class="ld-footer-item">🕐 Thời gian hệ thống: {now_date_str} {now_str} (GMT+7)</div>'
+        f'<div class="ld-footer-item">Update every 1 minute</div>'
+        f'<div class="ld-footer-item">🕐 System time: {now_date_str} {now_str} (GMT+7)</div>'
         f'<div class="ld-footer-item" style="margin-left:auto">'
-        f'Kết nối: <span class="ld-footer-dot"></span><span class="ld-footer-online">Online</span>'
+        f'Connection: <span class="ld-footer-dot"></span><span class="ld-footer-online">Online</span>'
         f'</div>'
         f'</div>',
         unsafe_allow_html=True,
