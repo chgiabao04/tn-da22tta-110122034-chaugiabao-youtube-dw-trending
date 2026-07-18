@@ -181,7 +181,7 @@ def render_home() -> None:
       <div class="hp-kpi-inner">
         <div class="hp-kpi-card">
           <div class="hp-kpi-icon" style="background:rgba(232,0,29,0.15)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#E8001D"><path d="M8 5v14l11-7z"/></svg>
+            <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 2.656a3.016 3.016 0 0 0-2.122-2.136C19.505 0 12 0 12 0S4.495 0 2.627.52A3.016 3.016 0 0 0 .505 2.656 31.64 31.64 0 0 0 0 8.5a31.64 31.64 0 0 0 .505 5.844 3.016 3.016 0 0 0 2.122 2.136C4.495 17 12 17 12 17s7.505 0 9.373-.52a3.016 3.016 0 0 0 2.122-2.136A31.64 31.64 0 0 0 24 8.5a31.64 31.64 0 0 0-.505-5.844z" fill="#E8001D"/><path d="M9.6 12.143l6.285-3.643L9.6 4.857v7.286z" fill="#fff"/></svg>
           </div>
           <div>
             <div class="hp-kpi-num">158K+</div>
@@ -229,28 +229,37 @@ def render_home() -> None:
     st.markdown("""
     <section class="hp-why">
       <div class="hp-why-inner">
-        <h2 class="hp-why-title">Why Choose VISION?</h2>
+        <h2 class="hp-why-title">WHY CHOOSE <span class="hp-red">VISION?</span></h2>
         <div class="hp-why-grid">
           <div class="hp-why-card">
-            <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#E8001D"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <div class="hp-why-card-header">
+              <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#E8001D"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="hp-why-name">Instant Analysis</div>
             </div>
-            <div class="hp-why-name">Instant Analysis</div>
-            <div class="hp-why-desc">Just a few mouse clicks to analyze YouTube video trends in real-time with accurate data.</div>
+            <div class="hp-why-divider"></div>
+            <div class="hp-why-desc">Just a few clicks to analyze YouTube video trends in real-time with accurate data.</div>
           </div>
           <div class="hp-why-card">
-            <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div class="hp-why-card-header">
+              <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </div>
+              <div class="hp-why-name">Advanced AI Models</div>
             </div>
-            <div class="hp-why-name">XGBoost Model</div>
-            <div class="hp-why-desc">The model is trained on real-world data from 150K+ YouTube videos and 7M+ comments with high accuracy.</div>
+            <div class="hp-why-divider"></div>
+            <div class="hp-why-desc">Trained on real-world data from 150K+ YouTube videos and 7M+ comments with high accuracy.</div>
           </div>
           <div class="hp-why-card">
-            <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <div class="hp-why-card-header">
+              <div class="hp-why-icon" style="background:rgba(232,0,29,0.1)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              <div class="hp-why-name">Comprehensive Analysis</div>
             </div>
-            <div class="hp-why-name">Comprehensive Data</div>
-            <div class="hp-why-desc">8 key features.</div>
+            <div class="hp-why-divider"></div>
+            <div class="hp-why-desc">Multi-dimensional analysis across content, engagement, audience, and geographic insights.</div>
           </div>
         </div>
       </div>
@@ -284,11 +293,13 @@ def render_home() -> None:
           <div class="hp-footer-col-title">CONTACT</div>
           <div class="hp-footer-item">Individual Contributors</div>
           <div class="hp-footer-item">✉ chgiabao36925@gmail.com</div>
+          <div class="hp-footer-item">Trà Vinh University - DA22TTA - 110122034 - Graduation Project </div>
+          <div class="hp-footer-item">Vĩnh Long, Trà Vinh Ward, Vietnam</div>
         </div>
       </div>
       <div class="hp-footer-bottom">
         <span>© 2026 VISION Analytics. All rights reserved.</span>
-        <span>Data Warehouse &amp; Machine Learning Project</span>
+        <span>Data Warehouse & Youtube Trending Prediction</span>
       </div>
     </div>
     """, unsafe_allow_html=True)

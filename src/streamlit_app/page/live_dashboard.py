@@ -182,17 +182,17 @@ DASHBOARD_CSS = """
 /* ── TOKEN SYSTEM ── */
 :root {
     --red:        #E8001D;
-    --red-dim:    rgba(232,0,29,0.15);
-    --red-border: rgba(232,0,29,0.30);
-    --bg:         #0F0F0F;
-    --surface:    #161616;
-    --surface2:   #1E1E1E;
-    --surface3:   #242424;
-    --border:     rgba(255,255,255,0.07);
-    --border2:    rgba(255,255,255,0.12);
-    --text:       #FFFFFF;
-    --text-muted: rgba(255,255,255,0.50);
-    --text-dim:   rgba(255,255,255,0.30);
+    --red-dim:    rgba(232,0,29,0.08);
+    --red-border: rgba(232,0,29,0.20);
+    --bg:         #FFFFFF;
+    --surface:    #FFFFFF;
+    --surface2:   #FAFAFA;
+    --surface3:   #F3F4F6;
+    --border:     rgba(0,0,0,0.08);
+    --border2:    rgba(0,0,0,0.12);
+    --text:       #111827;
+    --text-muted: rgba(0,0,0,0.60);
+    --text-dim:   rgba(0,0,0,0.40);
     --green:      #22C55E;
     --blue:       #3B82F6;
     --amber:      #F59E0B;
@@ -362,8 +362,8 @@ a { text-decoration: none !important; }
     display: flex; align-items: center; gap: 8px;
 }
 .ld-time-box {
-    flex: 1; background: #161616;
-    border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+    flex: 1; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px;
     height: 40px; padding: 0 16px;
     display: flex; align-items: center;
     font-size: 0.85rem; font-weight: 600; color: var(--text);
@@ -372,7 +372,7 @@ a { text-decoration: none !important; }
 }
 .ld-refresh-btn {
     width: 40px; height: 40px; flex-shrink: 0;
-    background: #161616; border: 1px solid rgba(255,255,255,0.08);
+    background: var(--surface); border: 1px solid var(--border);
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     font-size: 1.20rem; color: var(--text-muted) !important;
@@ -419,7 +419,7 @@ a { text-decoration: none !important; }
     max-width: 240px !important;
 }
 /* Header background + padding */
-[class*="st-key-ld-header-container"] { padding: 28px 24px 16px 24px; margin-top: 4px; background: var(--surface); border-bottom: 1px solid var(--border); }
+[class*="st-key-ld-header-container"] { padding: 28px 24px 16px 24px; margin-top: 4px; background: var(--surface); border-bottom: none; }
 /* Restore small gap between the label markdown and selectbox widget */
 [class*="st-key-ld-header-container"] [data-testid="stVerticalBlock"] { gap: 2px !important; justify-content: flex-end !important; }
 /* Align control widgets to the bottom of their column */
@@ -427,23 +427,24 @@ a { text-decoration: none !important; }
 [class*="st-key-ld-header-container"] .ld-refresh-row { margin-top: auto !important; height: 40px !important; }
 /* Selectbox outer box: dark pill matching the mockup */
 [class*="st-key-ld-header-container"] [data-testid="stSelectbox"] > div > div {
-    background: #161616 !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
     border-radius: 10px !important;
     height: 40px !important; min-height: 40px !important;
     padding: 0 14px !important;
     display: flex !important; align-items: center !important;
     font-size: 0.85rem !important; font-weight: 500 !important;
+    color: var(--text) !important;
     transition: border-color 0.2s !important;
     cursor: pointer !important;
 }
 [class*="st-key-ld-header-container"] [data-testid="stSelectbox"] > div > div:hover {
-    border-color: rgba(255,255,255,0.18) !important;
+    border-color: var(--red) !important;
 }
 /* Chevron / dropdown arrow: muted white */
 [class*="st-key-ld-header-container"] [data-testid="stSelectbox"] svg {
-    color: rgba(255,255,255,0.40) !important;
-    fill: rgba(255,255,255,0.40) !important;
+    color: var(--text-muted) !important;
+    fill: var(--text-muted) !important;
     width: 15px !important; height: 15px !important;
     flex-shrink: 0 !important;
 }
@@ -489,21 +490,28 @@ a { text-decoration: none !important; }
 .main-grid-pad { padding: 16px 20px 14px; }
 
 /* ── VIDEO TABLE (left col) ── */
-.vtable { width: 100%; border-collapse: collapse; }
+.vtable { width: 100%; border-collapse: collapse; border: none !important; }
 .vtable thead th {
     font-size: 0.58rem; font-weight: 700; letter-spacing: .8px;
     text-transform: uppercase; color: var(--text-dim);
     padding: 7px 10px; text-align: left;
     background: var(--surface2); position: sticky; top: 0; z-index: 2;
     white-space: nowrap;
+    border: none !important;
 }
 .vtable tbody tr {
-    border-bottom: 1px solid rgba(255,255,255,.04);
+    border-bottom: 1px solid rgba(0,0,0,.05);
     transition: background .12s;
 }
-.vtable tbody tr:hover { background: rgba(255,255,255,.025); }
+.vtable tbody tr:hover { background: rgba(0,0,0,.02); }
 .vtable tbody tr:last-child { border-bottom: none; }
-.vtable td { padding: 12px 10px; vertical-align: middle; }
+.vtable td { 
+    padding: 12px 10px; 
+    vertical-align: middle; 
+    border-left: none !important; 
+    border-right: none !important; 
+    border-top: none !important; 
+}
 .v-rank {
     width: 32px; height: 32px; border-radius: 8px;
     display: inline-flex; align-items: center; justify-content: center;
@@ -514,7 +522,7 @@ a { text-decoration: none !important; }
 .v-rank.top3 { background: var(--red); color: #fff; border-color: transparent; }
 .v-thumb-wrap {
     position: relative; width: 120px; height: 68px;
-    border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #1a1a1a;
+    border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #e5e7eb;
 }
 .v-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .v-dur {
@@ -561,10 +569,10 @@ a { text-decoration: none !important; }
     cursor: pointer; background: var(--surface);
 }
 .v-see-all:hover { color: var(--text); }
-
+ 
 /* ── RIGHT COL STACK ── */
 .right-stack { display: flex; flex-direction: column; gap: 12px; }
-
+ 
 /* donut */
 .donut-body { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
 .donut-center-label {
@@ -579,13 +587,13 @@ a { text-decoration: none !important; }
 .cat-legend { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 .cat-row { display: flex; align-items: center; gap: 7px; font-size: 0.68rem; }
 .cat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-.cat-name { flex: 1; color: rgba(255,255,255,.72); font-family: 'Inter', sans-serif; }
+.cat-name { flex: 1; color: var(--text-muted); font-family: 'Inter', sans-serif; }
 .cat-pct { font-weight: 700; color: var(--text); font-family: 'Inter', sans-serif; }
-
+ 
 /* time chart */
 .time-chart-body { padding: 10px 14px 12px; }
 .time-chart-svg { width: 100%; }
-
+ 
 /* shorts */
 .short-row {
     display: flex; align-items: center; gap: 10px;
@@ -596,10 +604,10 @@ a { text-decoration: none !important; }
     overflow: hidden;
 }
 .short-row:last-child { border-bottom: none; }
-.short-row:hover { background: rgba(255,255,255,.025); }
+.short-row:hover { background: rgba(0,0,0,.02); }
 .short-thumb {
     width: 52px; height: 52px; border-radius: 8px;
-    object-fit: cover; background: #1a1a1a; flex-shrink: 0; display: block;
+    object-fit: cover; background: #e5e7eb; flex-shrink: 0; display: block;
     position: relative;
 }
 .short-thumb-wrap { position: relative; flex-shrink: 0; }
@@ -632,16 +640,16 @@ a { text-decoration: none !important; }
     font-size: 0.70rem; color: var(--text-muted); cursor: pointer;
 }
 .short-see-all:hover { color: var(--text); }
-
+ 
 /* ── CHANNEL ROWS (channels card) ── */
 .ch-list { display: flex; flex-direction: column; }
 .ch-row {
     display: flex; align-items: center; gap: 9px;
-    padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,.04);
+    padding: 8px 14px; border-bottom: 1px solid rgba(0,0,0,.05);
     overflow: hidden; transition: background .12s;
 }
 .ch-row:last-child { border-bottom: none; }
-.ch-row:hover { background: rgba(255,255,255,.025); }
+.ch-row:hover { background: rgba(0,0,0,.02); }
 .ch-rank {
     width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
     display: inline-flex; align-items: center; justify-content: center;
@@ -680,10 +688,10 @@ a { text-decoration: none !important; }
     width: 100%; height: auto; max-height: 200px;
     display: block;
 }
-/* All land paths: dark gray */
+/* All land paths: light gray */
 .country-map svg path {
-    fill: #2a2a2a !important;
-    stroke: #111 !important;
+    fill: #e5e7eb !important;
+    stroke: #ffffff !important;
     stroke-width: 0.4px !important;
     transition: fill .3s;
 }
@@ -805,7 +813,7 @@ def _donut_svg(cat_data, total, size=108) -> str:
         f'<svg width="{size}" height="{size}" viewBox="0 0 {size} {size}" '
         f'xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg);flex-shrink:0">'
         f'<circle cx="{cx}" cy="{cy}" r="{r_mid:.1f}" fill="none" '
-        f'stroke="rgba(255,255,255,.06)" stroke-width="{sw:.1f}"/>'
+        f'stroke="rgba(0,0,0,.06)" stroke-width="{sw:.1f}"/>'
         + "".join(segs) + "</svg>"
     )
 
@@ -979,15 +987,15 @@ def _render_time_chart_card(seed=7) -> None:
             showlegend=False,
             xaxis=dict(
                 showgrid=False,
-                color="rgba(255,255,255,0.28)",
+                color="rgba(0,0,0,0.45)",
                 dtick=4,
                 tickfont=dict(size=9, family="Inter, sans-serif"),
                 tickangle=0,
             ),
             yaxis=dict(
                 showgrid=True,
-                gridcolor="rgba(255,255,255,0.04)",
-                color="rgba(255,255,255,0.28)",
+                gridcolor="rgba(0,0,0,0.06)",
+                color="rgba(0,0,0,0.45)",
                 tickvals=[0, 5_000_000, 10_000_000, 15_000_000, 20_000_000],
                 ticktext=["0", "5M", "10M", "15M", "20M"],
                 tickfont=dict(size=9, family="Inter, sans-serif"),
@@ -995,9 +1003,9 @@ def _render_time_chart_card(seed=7) -> None:
             ),
             hovermode="x unified",
             hoverlabel=dict(
-                bgcolor="#161616",
-                bordercolor="rgba(255,255,255,0.08)",
-                font=dict(color="#FFFFFF", family="Inter, sans-serif", size=10)
+                bgcolor="#FFFFFF",
+                bordercolor="rgba(0,0,0,0.08)",
+                font=dict(color="#111827", family="Inter, sans-serif", size=10)
             )
         )
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -1172,8 +1180,12 @@ def render_trending() -> None:
         # Header container styling: increase top padding to 45px
         '[class*="st-key-ld-header-container"] {'
         '  background: var(--surface) !important;'
-        '  border-bottom: 1px solid var(--border) !important;'
-        '  padding: 45px 24px 16px 24px !important;'
+        '  border-bottom: none !important;'
+        '  padding: 30px 24px 8px 24px !important;'
+        '}'
+        '[class*="st-key-ld-controls-bar"] {'
+        '  margin-top: -18px !important;'
+        '  margin-bottom: -20px !important;'
         '}'
         # Controls Bar layout styling
         '[class*="st-key-ld-controls-bar"] [data-testid="stHorizontalBlock"] {'
@@ -1202,22 +1214,22 @@ def render_trending() -> None:
         '}'
         # Custom Selectbox styling for Controls Bar (Deep dark pill)
         '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] > div > div {'
-        '  background: #161616 !important;'
-        '  border: 1px solid rgba(255,255,255,0.08) !important;'
+        '  background: var(--surface) !important;'
+        '  border: 1px solid var(--border) !important;'
         '  border-radius: 10px !important;'
         '  height: 40px !important; min-height: 40px !important;'
         '  padding: 0 14px !important;'
         '  display: flex !important; align-items: center !important;'
         '  font-size: 0.85rem !important; font-weight: 500 !important;'
-        '  color: #ffffff !important;'
+        '  color: var(--text) !important;'
         '  transition: border-color 0.2s !important; cursor: pointer !important;'
         '}'
         '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] > div > div:hover {'
-        '  border-color: rgba(255,255,255,0.18) !important;'
+        '  border-color: var(--red) !important;'
         '}'
         '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] svg {'
-        '  color: rgba(255,255,255,0.40) !important;'
-        '  fill: rgba(255,255,255,0.40) !important;'
+        '  color: var(--text-muted) !important;'
+        '  fill: var(--text-muted) !important;'
         '  width: 15px !important; height: 15px !important;'
         '}'
         '[class*="st-key-ld-controls-bar"] [data-testid="stSelectbox"] label {'

@@ -85,7 +85,7 @@ def _gauge_html(pct: float, color: str, level: str) -> str:
     deg = pct * 3.6
     return (
         f'<div class="pp-gauge-wrap">'
-        f'<div class="pp-gauge" style="background:conic-gradient({color} {deg:.1f}deg,rgba(255,255,255,0.08) {deg:.1f}deg);">'
+        f'<div class="pp-gauge" style="background:conic-gradient({color} {deg:.1f}deg,rgba(0,0,0,0.06) {deg:.1f}deg);">'
         f'<div class="pp-gauge-inner">'
         f'<div class="pp-gauge-pct" style="color:{color};">{pct:.1f}<span>%</span></div>'
         f'<div class="pp-gauge-tag" style="color:{color};">{_safe(level)}</div>'
@@ -159,7 +159,7 @@ def _generate_shap_insights(explanation):
 
         items.append(
             f'<div style="margin-bottom:12px;padding:12px 14px;border-left:3px solid {color};'
-            f'background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.85);">'
+            f'background:var(--gray-100);border-radius:8px;font-size:0.9rem;line-height:1.6;color:var(--black);">'
             f'<span style="color:{color};font-weight:700;margin-right:4px;">{icon}</span> {msg}</div>'
         )
     return "".join(items)
@@ -445,6 +445,23 @@ def _render_results(prob, reasoning, features, video_info):
 
 # ── Main render entry point ───────────────────────────────────────────────────
 def render_predict() -> None:
+    # ── Gray background ───────────────────────────────────────────────────────
+    st.markdown("""
+    <style>
+    html body,
+    html body [data-testid="stApp"],
+    html body [data-testid="stAppViewContainer"],
+    html body .stApp {
+        background-color: #F0F0F0 !important;
+        background-image: none !important;
+    }
+    html body section[data-testid="stMain"],
+    html body section[data-testid="stMain"] > div {
+        background: transparent !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # ── Page heading ─────────────────────────────────────────────────────────
     st.markdown(
         """

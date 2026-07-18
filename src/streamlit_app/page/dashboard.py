@@ -5,8 +5,8 @@ import streamlit as st
 DATA_PATH = r"D:\tn-da22tta-110122034-chaugiabao-youtube-dw-trending\src\analysis\data\cleaned_video.csv"
 
 RED = "#E8001D"
-GRAY = "#3A3A3A"
-PLOT_FONT = dict(family="DM Sans, sans-serif", color="#E8E8E8", size=12)
+GRAY = "#CCCCCC"
+PLOT_FONT = dict(family="DM Sans, sans-serif", color="#374151", size=12)
 
 WEEKDAY_ORDER = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 WEEKDAY_MAP = {
@@ -54,7 +54,27 @@ def _base_layout(height: int = 280, margin: dict | None = None) -> dict:
 
 
 def render_dashboard() -> None:
-    st.markdown('<div class="ov-page"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    /* Dashboard blob background — red + blue corners */
+    html body,
+    html body [data-testid="stApp"],
+    html body [data-testid="stAppViewContainer"],
+    html body .stApp {
+        background:
+            radial-gradient(ellipse 60% 55% at 0% 5%,  rgba(99,149,237,0.28) 0%, transparent 70%),
+            radial-gradient(ellipse 55% 50% at 100% 95%, rgba(232,0,29,0.22)  0%, transparent 70%),
+            radial-gradient(ellipse 40% 35% at 95% 10%,  rgba(232,0,29,0.08)  0%, transparent 60%),
+            #F6F8FD !important;
+        background-attachment: fixed !important;
+    }
+    html body section[data-testid="stMain"],
+    html body section[data-testid="stMain"] > div {
+        background: transparent !important;
+    }
+    </style>
+    <div class="ov-page"></div>
+    """, unsafe_allow_html=True)
 
     df = load_data()
     dfv = video_level(df)
@@ -162,7 +182,7 @@ stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         (TREND_ICON, "TRENDING RATE", f"{trending_rate:.1f}%", "Trending videos", sparklines[3]),
     ]
     cells = "".join(
-        f'<td style="padding: 0 0.6rem; vertical-align: top;">' +
+        f'<td style="padding: 0; vertical-align: top; border: none !important; background: transparent !important;">' +
         f'<div class="ov-kpi-card" style="position:relative; padding-bottom:0.5rem; overflow:hidden;">' +
         f'<span class="ov-kpi-label" style="display:block; margin-bottom:0.75rem;">{label}</span>' +
         f'<span class="ov-kpi-value" style="display:block;">{value}</span>' +
@@ -180,7 +200,7 @@ stroke="#E8001D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
     )
     st.markdown(
         '<style>.ov-kpi-card::after { display: none !important; }</style>' +
-        f'<table style="width:100%; table-layout:fixed;"><tr>{cells}</tr></table>',
+        f'<table style="width:100%; table-layout:fixed; border-collapse: separate; border-spacing: 16px 0; border: none !important; background: transparent !important;"><tr style="border: none !important; background: transparent !important;">{cells}</tr></table>',
         unsafe_allow_html=True,
     )
 
@@ -201,7 +221,7 @@ def _render_trend_donut(dfv: pd.DataFrame) -> None:
             hole=0.68,
             sort=False,
             textinfo="none",
-            marker=dict(colors=[RED, GRAY], line=dict(color="#131313", width=2)),
+            marker=dict(colors=[RED, GRAY], line=dict(color="#FFFFFF", width=2)),
         )
     )
     fig.update_layout(
@@ -209,8 +229,8 @@ def _render_trend_donut(dfv: pd.DataFrame) -> None:
         showlegend=False,
         annotations=[
             dict(
-                text=f"<b>{total:,}</b><br><span style='font-size:11px;color:rgba(255,255,255,0.45)'>TOTAL</span>",
-                x=0.5, y=0.5, showarrow=False, font=dict(size=18, color="#fff"),
+                text=f"<b>{total:,}</b><br><span style='font-size:11px;color:rgba(0,0,0,0.45)'>TOTAL</span>",
+                x=0.5, y=0.5, showarrow=False, font=dict(size=18, color="#111827"),
             )
         ],
     )
@@ -251,13 +271,13 @@ def _render_top_topics(dfv: pd.DataFrame) -> None:
             marker=dict(color=RED),
             text=[f"{v:,}" for v in counts.values],
             textposition="outside",
-            textfont=dict(color="#E8E8E8", size=11),
+            textfont=dict(color="#374151", size=11),
         )
     )
     fig.update_layout(
         **_base_layout(320, margin=dict(l=10, r=40, t=10, b=10)),
         xaxis=dict(visible=False),
-        yaxis=dict(showgrid=False, color="#E8E8E8"),
+        yaxis=dict(showgrid=False, color="#374151"),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -274,12 +294,12 @@ def _render_weekday(dfv: pd.DataFrame) -> None:
     fig = go.Figure(go.Bar(x=WEEKDAY_ORDER, y=counts.values, marker=dict(color=RED)))
     fig.update_layout(
         **_base_layout(260),
-        xaxis=dict(showgrid=False, color="#E8E8E8"),
+        xaxis=dict(showgrid=False, color="#374151"),
         yaxis=dict(
             title="Number of Videos",
             showgrid=True,
-            gridcolor="rgba(255,255,255,0.06)",
-            color="rgba(255,255,255,0.45)",
+            gridcolor="rgba(0,0,0,0.07)",
+            color="#374151",
         ),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -304,12 +324,12 @@ def _render_hour(dfv: pd.DataFrame) -> None:
     )
     fig.update_layout(
         **_base_layout(260),
-        xaxis=dict(title="Publish Hour", showgrid=False, color="rgba(255,255,255,0.45)", dtick=3),
+        xaxis=dict(title="Publish Hour", showgrid=False, color="#374151", dtick=3),
         yaxis=dict(
             title="Number of Videos",
             showgrid=True,
-            gridcolor="rgba(255,255,255,0.06)",
-            color="rgba(255,255,255,0.45)",
+            gridcolor="rgba(0,0,0,0.07)",
+            color="#374151",
         ),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -329,13 +349,13 @@ def _render_region(dfv: pd.DataFrame) -> None:
             marker=dict(color=RED),
             text=[f"{v:,}" for v in counts.values],
             textposition="outside",
-            textfont=dict(color="#E8E8E8", size=11),
+            textfont=dict(color="#374151", size=11),
         )
     )
     fig.update_layout(
         **_base_layout(320, margin=dict(l=10, r=50, t=10, b=10)),
         xaxis=dict(visible=False),
-        yaxis=dict(showgrid=False, color="#E8E8E8"),
+        yaxis=dict(showgrid=False, color="#374151"),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
@@ -356,16 +376,20 @@ def _render_correlation(dfv: pd.DataFrame) -> None:
             y=labels,
             zmin=-1,
             zmax=1,
-            colorscale=[[0, "#3A3A3A"], [0.5, "#7A1018"], [1, RED]],
+            colorscale=[
+                [0.0, "#1d4ed8"],  # Deep blue for strong negative correlation (-1)
+                [0.5, "#f3f4f6"],  # Off-white/light-gray for neutral correlation (0)
+                [1.0, RED]         # Brand red for strong positive correlation (1)
+            ],
             text=[[f"{v:.2f}" for v in row] for row in corr],
             texttemplate="%{text}",
-            textfont=dict(size=11, color="#fff"),
-            colorbar=dict(thickness=12, outlinewidth=0, tickfont=dict(color="rgba(255,255,255,0.5)", size=10)),
+            textfont=dict(size=11),  # Bỏ color để Plotly tự động tính toán tương phản (chữ trắng trên nền đỏ đậm, chữ đen trên nền sáng)
+            colorbar=dict(thickness=12, outlinewidth=0, tickfont=dict(color="#374151", size=10)),
         )
     )
     fig.update_layout(
         **_base_layout(320, margin=dict(l=10, r=10, t=10, b=70)),
-        xaxis=dict(showgrid=False, color="#E8E8E8", side="bottom"),
-        yaxis=dict(showgrid=False, color="#E8E8E8", autorange="reversed"),
+        xaxis=dict(showgrid=False, color="#374151", side="bottom"),
+        yaxis=dict(showgrid=False, color="#374151", autorange="reversed"),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
