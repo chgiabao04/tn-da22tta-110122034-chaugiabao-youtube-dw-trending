@@ -26,8 +26,7 @@ def render_navbar(active_tab: str = "home") -> None:
     st.markdown(f"""
     <div class="navbar">
         <a class="nav-logo" href="?tab=home" target="_self">
-            <div class="logo-icon">▶</div>
-            VISION
+            <div style="display:inline-block; background: rgba(200,200,200,0.18); border-radius: 6px; padding: 4px 12px; letter-spacing: 2px;">VISION</div>
         </a>
         <div class="nav-links">{links}</div>
         <div class="nav-right" style="width: 120px;"></div>
